@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'FetchingView_Example' do
+  pod 'FetchingView', :path => '../'
+
+  target 'FetchingView_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
