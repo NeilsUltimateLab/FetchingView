@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'FetchingView'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of FetchingView.'
+  s.summary          = 'Views to indicate data fetching states.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+Views to show on different states of data fetching. Shows indicator views for fetching state, error states etc.
                        DESC
 
   s.homepage         = 'https://github.com/NeilsUltimateLab/FetchingView'
@@ -28,7 +28,7 @@ TODO: Add long description of the pod here.
   s.source           = { :git => 'https://github.com/NeilsUltimateLab/FetchingView.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '9.0'
 
   s.source_files = 'FetchingView/Classes/**/*'
   

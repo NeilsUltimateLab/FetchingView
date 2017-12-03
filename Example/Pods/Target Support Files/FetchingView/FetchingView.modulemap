@@ -1,0 +1,6 @@
+framework module FetchingView {
+  umbrella header "FetchingView-umbrella.h"
+
+  export *
+  module * { export * }
+}

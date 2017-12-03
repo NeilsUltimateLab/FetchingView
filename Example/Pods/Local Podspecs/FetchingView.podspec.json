@@ -1,0 +1,22 @@
+{
+  "name": "FetchingView",
+  "version": "0.1.0",
+  "summary": "A short description of FetchingView.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/NeilsUltimateLab/FetchingView",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "NeilsUltimateLab": "neilsultimatelab@icloud.com"
+  },
+  "source": {
+    "git": "https://github.com/NeilsUltimateLab/FetchingView.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "FetchingView/Classes/**/*"
+}
