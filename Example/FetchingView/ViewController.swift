@@ -37,6 +37,9 @@ class ViewController: UIViewController {
     
     func setupFetchingView() {
         self.fetchingView = FetchingView(listView: self.tableView, parentView: self.view)
+        self.fetchingView.onButtonTapAction = { [weak self] in
+            self?.fetchResources()
+        }
     }
     
     func fetchResources() {
@@ -46,7 +49,42 @@ class ViewController: UIViewController {
             self.fetchingState = .fetchedData([""])
         }
     }
+    
+    
+    @IBAction func refreshAction(_ sender: Any) {
+        self.fetchResources()
+    }
 
+    @IBAction func errorActions(_ sender: Any) {
+        let sessionExpiredError = UIAlertAction(title: "Session Expired", style: .destructive) { (_) in
+            self.fetchingState = .fetchedError(AppError.sessionExpired)
+        }
+        
+        let notFoundError = UIAlertAction(title: "Not Found", style: .default) { (_) in
+            self.fetchingState = .fetchedError(AppError.notFound)
+        }
+        
+        let notReachableError = UIAlertAction(title: "Not reachable", style: .default) { (_) in
+            self.fetchingState = .fetchedError(AppError.notReachable)
+        }
+        
+        let requestTimedOutError = UIAlertAction(title: "Request Timed Out", style: .default) { (_) in
+            self.fetchingState = .fetchedError(AppError.requestTimedOut)
+        }
+        
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(sessionExpiredError)
+        alert.addAction(notFoundError)
+        alert.addAction(notReachableError)
+        alert.addAction(requestTimedOutError)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    @IBAction func cancelAction(_ sender: Any) {
+        self.fetchingState = .fetchedData([])
+    }
+    
+    
 }
 
 extension ViewController: UITableViewDelegate {

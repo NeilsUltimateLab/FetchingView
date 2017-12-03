@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -59,7 +60,25 @@
                             <constraint firstAttribute="bottom" secondItem="Qyf-fX-mKL" secondAttribute="bottom" id="ofL-gV-0ba"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="bDb-7O-rfS"/>
+                    <navigationItem key="navigationItem" id="bDb-7O-rfS">
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="cancel" id="Ttb-1y-knw">
+                                <connections>
+                                    <action selector="cancelAction:" destination="vXZ-lx-hvc" id="Y3S-sE-gkV"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="action" id="qLh-4j-Iqr">
+                                <connections>
+                                    <action selector="errorActions:" destination="vXZ-lx-hvc" id="OXE-qR-bXg"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="refresh" id="Lsl-ux-NQF">
+                                <connections>
+                                    <action selector="refreshAction:" destination="vXZ-lx-hvc" id="O4l-lB-Ygq"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="Qyf-fX-mKL" id="p0J-dx-7LG"/>
                     </connections>

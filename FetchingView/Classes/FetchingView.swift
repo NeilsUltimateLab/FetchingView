@@ -12,7 +12,7 @@ public class FetchingView<A> {
     var listView: UIView
     var parentView: UIView
     
-    var onButtonTapAction: (()->Void)?
+    public var onButtonTapAction: (()->Void)?
     
     public var fetchingState: FetchingState<A> = .fetching {
         didSet {
@@ -184,6 +184,7 @@ public class FetchingView<A> {
         let buttons: [UIButton] = buttons.flatMap({ title in
             let button = UIButton(type: .system)
             button.setTitle(title, for: .normal)
+            button.addTarget(self, action: #selector(buttonAction(_:)), for: UIControlEvents.touchUpInside)
             return button
         })
         
