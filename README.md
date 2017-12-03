@@ -10,11 +10,13 @@
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
 Fetching view has a state machine called Fetching State :
-`enum FetchingState<A> {
+`
+enum FetchingState<A> {
     case fetching
     case fetchedError(AppErrorProvider)
     case fetchedData(A)
-}`
+}
+`
 
 Fetching view will display `UIActivityIndicatorView` for `FetchingState<A>.fetching` and error message for `.fetchedError(Error)` state.
 
