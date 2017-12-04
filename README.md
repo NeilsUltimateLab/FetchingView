@@ -22,7 +22,7 @@ Fetching view will display `UIActivityIndicatorView` for `FetchingState<A>.fetch
 
 #####Here is an screenshot from an example application using FetchingView
 
-![Screenshot of Example application](FetchingView/FetchingViewExample.gif)
+![Screenshot of Example application](Example/FetchingView/FetchingViewExample.gif)
 
 
 ## Requirements
