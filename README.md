@@ -20,6 +20,9 @@ enum FetchingState<A> {
 
 Fetching view will display `UIActivityIndicatorView` for `FetchingState<A>.fetching` and error message for `.fetchedError(Error)` state.
 
+#####Here is an screenshot from an example application using FetchingView
+
+![Screenshot of Example application](FetchingView/FetchingViewExample.gif)
 
 
 ## Requirements
