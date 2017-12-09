@@ -63,6 +63,7 @@ public class FetchingView<A> {
     
     lazy var containerView: UIView = {
         let view = UIView(frame: .zero)
+        view.backgroundColor = .clear
         view.addSubview(parentStackView)
         view.translatesAutoresizingMaskIntoConstraints = false
         parentStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -116,13 +117,13 @@ public class FetchingView<A> {
     }()
     
     
-    var indicatorView: UIActivityIndicatorView = {
+    public var indicatorView: UIActivityIndicatorView = {
         let view = UIActivityIndicatorView(activityIndicatorStyle: .gray)
         view.hidesWhenStopped = true
         return view
     }()
     
-    var loadingLabel: UILabel = {
+    public var loadingLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = UIColor.gray
@@ -132,7 +133,7 @@ public class FetchingView<A> {
         return label
     }()
     
-    var titleLabel: UILabel = {
+    public var titleLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = UIColor.gray
@@ -143,7 +144,7 @@ public class FetchingView<A> {
         return label
     }()
     
-    var descriptionLabel: UILabel = {
+    public var descriptionLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = UIColor.gray
@@ -154,7 +155,7 @@ public class FetchingView<A> {
         return label
     }()
     
-    var imageView: UIImageView = {
+    public var imageView: UIImageView = {
         let imageView = UIImageView(frame: .zero)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
