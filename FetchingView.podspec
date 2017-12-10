@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'FetchingView'
-  s.version          = '0.1.1'
+  s.version          = '0.2.0'
   s.summary          = 'Views to indicate data fetching states.'
 
 # This description is used to generate tags and improve search results.
@@ -19,6 +19,7 @@ Pod::Spec.new do |s|
 
   s.description      = <<-DESC
 Views to show on different states of data fetching. Shows indicator views for fetching state, error states etc.
+FetchingView can show headsUpDisplay (HUD) for the toast. It supports indefinite, definite and message type of HUDs.
                        DESC
 
   s.homepage         = 'https://github.com/NeilsUltimateLab/FetchingView'
