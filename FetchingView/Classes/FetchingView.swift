@@ -12,12 +12,12 @@ public class FetchingView<A> {
     var listView: UIView
     var parentView: UIView
     
-    public var fetchingState: FetchingState<A> = .fetching {
-        didSet {
-            validate(state: fetchingState)
-        }
-    }
     
+    /// FetchingView Mechanism
+    ///
+    /// - Parameters:
+    ///   - listView: This view could be your `tableView`, `collectionView`, `scrollView` or some other `UIView`. `listView` will hide when fetching state views were rendered.
+    ///   - parentView: ParentView may be the `superview` of `listView`. ParentView will be the `containerView` for the fetching state views.
     public init(listView: UIView, parentView: UIView) {
         self.listView = listView
         self.parentView = parentView
@@ -25,6 +25,16 @@ public class FetchingView<A> {
         prepareViews()
     }
     
+    /// Tracking states of web-request
+    public var fetchingState: FetchingState<A> = .fetching {
+        didSet {
+            validate(state: fetchingState)
+        }
+    }
+    
+    /// When `fetchingState` changes this method will be called.
+    ///
+    /// - Parameter state: `fetchingState`
     private func validate(state: FetchingState<A>) {
         self.listView.isHidden = true
         self.containerView.isHidden = false
@@ -55,6 +65,8 @@ public class FetchingView<A> {
         }
     }
     
+    
+    /// Parent `containerView` for the all stackViews.
     lazy var containerView: UIView = {
         let view = ViewFactory.view(forBackgroundColor: .clear, clipsToBounds: true)
         view.addSubview(parentStackView)
@@ -65,14 +77,17 @@ public class FetchingView<A> {
         return view
     }()
     
+    
+    /// Parent StackView that contains `imageStackView` ,`titleStackView`, `textStackView`, `buttonStackView`.
     var parentStackView: UIStackView = {
-        let stackView = ViewFactory.stackView(forAxis: .vertical,
+        return ViewFactory.stackView(forAxis: .vertical,
                                               alignment: .fill,
                                               distribution: .fill,
                                               spacing: 22)
-        return stackView
     }()
     
+    
+    /// Loading StackView contains `UIActivityIndicatorView`, `UILabel`.
     lazy var loadingStackView: UIStackView = {
         let stackView = ViewFactory.stackView(forAxis: .vertical,
                                               alignment: .center,
@@ -83,6 +98,8 @@ public class FetchingView<A> {
         return stackView
     }()
     
+    
+    /// Label StackView contains `UILabel`s for `title` and `description`
     lazy var labelStackView: UIStackView = {
         let stackView = ViewFactory.stackView(forAxis: .vertical,
                                               alignment: .center,
@@ -93,21 +110,27 @@ public class FetchingView<A> {
         return stackView
     }()
     
+    /// Button StackView *will contain the response buttons provided by the* **API client** .
     lazy var buttonStackView: UIStackView = {
-        let stackView = ViewFactory.stackView(forAxis: .vertical,
+        return ViewFactory.stackView(forAxis: .vertical,
                                               alignment: .center,
                                               distribution: .fill,
                                               spacing: 4)
-        return stackView
     }()
     
     
+    /// UIActivityIndicatorView will be rendered when `fetchingState` is `.fetching`
     public var indicatorView: UIActivityIndicatorView = {
-        let view = ViewFactory.activityIndicatorView(style: .gray,
+        return ViewFactory.activityIndicatorView(style: .gray,
                                                      hidesWhenStopped: true)
-        return view
     }()
     
+    
+    /// `loadingLabel` will be rendered below `indicatorView` when `fetchingState` is      `fetching`.
+    ///
+    /// The default text is "`LOADING`".
+    ///
+    /// `loadingLabel`'s text can be changed by API User.
     public var loadingLabel: UILabel = {
         let label = ViewFactory.label(title: "Loading".uppercased(),
                                       textAlignment: .center,
@@ -117,6 +140,11 @@ public class FetchingView<A> {
         return label
     }()
     
+    /// `titleLabel` will be rendered when `fetchingState` is `fetchedError(AppErrorProvider)`.
+    ///
+    /// The default text is empty text.
+    ///
+    /// `titleLabel`'s text will be changed `AppErrorProvider`'s `title` property.
     public var titleLabel: UILabel = {
         let label = ViewFactory.label(title: "",
                                       textAlignment: .center,
@@ -127,6 +155,11 @@ public class FetchingView<A> {
         return label
     }()
     
+    /// `descriptionLabel` will be rendered when `fetchingState` is `fetchedError(AppErrorProvider)`.
+    ///
+    /// The default text is empty text.
+    ///
+    /// `descriptionLabel`'s text will be changed `AppErrorProvider`'s `subtitle` property.
     public var descriptionLabel: UILabel = {
         let label = ViewFactory.label(title: "",
                                       textAlignment: .center,
@@ -137,6 +170,11 @@ public class FetchingView<A> {
         return label
     }()
     
+    /// `imageView` will be rendered when `fetchingState` is `fetchedError(AppErrorProvider)`.
+    ///
+    /// The default image is `nil`.
+    ///
+    /// `imageView`'s image will be changed `AppErrorProvider`'s `image` property.
     public var imageView: UIImageView = {
         let imageView = ViewFactory.imageView(image: nil,
                                               contentMode: .scaleAspectFit)
@@ -151,6 +189,10 @@ public class FetchingView<A> {
         containerView.centerYAnchor.constraint(equalTo: parentView.centerYAnchor, constant: 0).isActive = true
     }
     
+    
+    /// To add `UIButton`s to `buttonStackView`. `FetchingView` will not handle any `UIButton` touch `events`
+    ///
+    /// - Parameter buttons: `UIButton`'s `targetAction` must be set by API User.
     public func add(_ buttons: [UIButton]) {
         buttonStackView.arrangedSubviews.forEach({$0.removeFromSuperview()})
         for button in buttons {
