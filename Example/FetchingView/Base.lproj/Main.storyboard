@@ -62,6 +62,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="bDb-7O-rfS">
+                        <barButtonItem key="leftBarButtonItem" systemItem="compose" id="zYj-92-SUe">
+                            <connections>
+                                <action selector="hudActions:" destination="vXZ-lx-hvc" id="4Zs-dH-uwd"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem systemItem="action" id="qLh-4j-Iqr">
                                 <connections>

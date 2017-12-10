@@ -12,6 +12,9 @@ public class FetchingView<A> {
     var listView: UIView
     var parentView: UIView
     
+    let appHUD: AppHUD = AppHUD()
+    
+    // MARK: - Initialiser -
     
     /// FetchingView Mechanism
     ///
@@ -25,6 +28,7 @@ public class FetchingView<A> {
         prepareViews()
     }
     
+    // MARK: - State Machine -
     /// Tracking states of web-request
     public var fetchingState: FetchingState<A> = .fetching {
         didSet {
@@ -65,7 +69,7 @@ public class FetchingView<A> {
         }
     }
     
-    
+    // MARK: - UIElements -
     /// Parent `containerView` for the all stackViews.
     lazy var containerView: UIView = {
         let view = ViewFactory.view(forBackgroundColor: .clear, clipsToBounds: true)
@@ -78,6 +82,7 @@ public class FetchingView<A> {
     }()
     
     
+    // MARK: UIStackViews
     /// Parent StackView that contains `imageStackView` ,`titleStackView`, `textStackView`, `buttonStackView`.
     var parentStackView: UIStackView = {
         return ViewFactory.stackView(forAxis: .vertical,
@@ -125,6 +130,7 @@ public class FetchingView<A> {
                                                      hidesWhenStopped: true)
     }()
     
+    // MARK: UILabels
     
     /// `loadingLabel` will be rendered below `indicatorView` when `fetchingState` is      `fetching`.
     ///
@@ -170,6 +176,8 @@ public class FetchingView<A> {
         return label
     }()
     
+    // MARK: UIImageView
+    
     /// `imageView` will be rendered when `fetchingState` is `fetchedError(AppErrorProvider)`.
     ///
     /// The default image is `nil`.
@@ -181,6 +189,8 @@ public class FetchingView<A> {
         imageView.tintColor = UIColor.gray
         return imageView
     }()
+    
+    // MARK: - Utilities
     
     func prepareViews() {
         self.parentView.addSubview(containerView)
@@ -202,4 +212,27 @@ public class FetchingView<A> {
         parentStackView.addArrangedSubview(buttonStackView)
     }
     
+    public func showHUD() {
+        appHUD.showHUD()
+    }
+    
+    public func showHUD(title: String?, message: String?, delay: TimeInterval) {
+        appHUD.showHud(title: title, message: message!, delay: delay)
+    }
+    
+    public func showProgressHUD(title: String?, message: String?) {
+        appHUD.showDefiniteHUD(title: title, message: message)
+    }
+    
+    public func updateProgressHUD(percentage: Float,
+                           shouldHideAfterCompletion autoHide: Bool = true,
+                           completion: (()->Void)? = nil) {
+        appHUD.updateProgress(percetage: percentage,
+                              shouldHideAfterCompletion: autoHide,
+                              completion: completion)
+    }
+    
+    public func hideHUD() {
+        appHUD.hideHUD(completion: nil)
+    }
 }

@@ -13,6 +13,7 @@
 		4A230B6B8C4CBED0E124FFA3908CBD31 /* Pods-FetchingView_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A6436C6225223EA8B62D7896C0432B9 /* Pods-FetchingView_Example-dummy.m */; };
 		5B13A8598D1B03C50240DC6E757144A1 /* FetchingView-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 849F9E100EB4DB5227C76114A71A16C6 /* FetchingView-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		77B550FB5F700CA21613551060BF2BC0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
+		D208AA721FDD93A3009F42B3 /* AppHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = D208AA711FDD93A3009F42B3 /* AppHUD.swift */; };
 		D244D50E1FD43DDB00388647 /* FetchingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D244D50D1FD43DDB00388647 /* FetchingView.swift */; };
 		D244D5101FD43EAF00388647 /* FetchingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D244D50F1FD43EAF00388647 /* FetchingState.swift */; };
 		D244D5121FD43EE600388647 /* AppErrorProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D244D5111FD43EE600388647 /* AppErrorProvider.swift */; };
@@ -58,6 +59,7 @@
 		BEF0C55AD5B95AB6F8A2A632A5252503 /* FetchingView.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = FetchingView.modulemap; sourceTree = "<group>"; };
 		C2C9945991CD97E18DEBA99DBF4C79EA /* Pods-FetchingView_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-FetchingView_Tests.modulemap"; sourceTree = "<group>"; };
 		CF6E9053015C85B0B2E1195152DF1A15 /* Pods-FetchingView_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FetchingView_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		D208AA711FDD93A3009F42B3 /* AppHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppHUD.swift; sourceTree = "<group>"; };
 		D244D50A1FD43DA600388647 /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
 		D244D50D1FD43DDB00388647 /* FetchingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchingView.swift; sourceTree = "<group>"; };
 		D244D50F1FD43EAF00388647 /* FetchingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchingState.swift; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 			children = (
 				D244D50A1FD43DA600388647 /* .gitkeep */,
 				D244D50D1FD43DDB00388647 /* FetchingView.swift */,
+				D208AA711FDD93A3009F42B3 /* AppHUD.swift */,
 				D27AB3451FDD72AC005457AC /* ViewFactory.swift */,
 				D244D50F1FD43EAF00388647 /* FetchingState.swift */,
 				D244D5111FD43EE600388647 /* AppErrorProvider.swift */,
@@ -351,6 +354,7 @@
 				D27AB3461FDD72AC005457AC /* ViewFactory.swift in Sources */,
 				D244D5101FD43EAF00388647 /* FetchingState.swift in Sources */,
 				EC4ACF2E9E9909B8D4188B48A4B1C5E7 /* FetchingView-dummy.m in Sources */,
+				D208AA721FDD93A3009F42B3 /* AppHUD.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

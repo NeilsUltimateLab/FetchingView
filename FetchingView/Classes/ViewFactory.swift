@@ -138,4 +138,24 @@ public class ViewFactory {
         return segmentedControl
     }
     
+    public static func visualEffectView(blurEffectStyle style: UIBlurEffectStyle) -> UIVisualEffectView {
+        let blurEffect = UIBlurEffect(style: style)
+        let visualEffectView = UIVisualEffectView(effect: blurEffect)
+        visualEffectView.translatesAutoresizingMaskIntoConstraints = false
+        return visualEffectView
+    }
+    
+    public static func progressView(progressViewStyle style: UIProgressViewStyle = .default,
+                                    isUserInterationEnabled interactionEnabled: Bool = false,
+                                    trackImage: UIImage = UIImage(),
+                                    trackTintColor: UIColor = .lightGray,
+                                    progressTintColor: UIColor = UIColor.blue) -> UIProgressView {
+        let pv = UIProgressView(progressViewStyle: style)
+        pv.isUserInteractionEnabled = interactionEnabled
+        pv.trackImage = trackImage
+        pv.trackTintColor = trackTintColor
+        pv.progressTintColor = progressTintColor
+        return pv
+    }
+    
 }

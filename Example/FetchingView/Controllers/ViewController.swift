@@ -148,6 +148,35 @@ class ViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
+    @IBAction func hudActions(_ sender: Any) {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let showHUDAction = UIAlertAction(title: "Indefinite HUD", style: .default) { (_) in
+            self.showHUD()
+        }
+        
+        let messageHUDAction = UIAlertAction(title: "Message HUD", style: .default) { (_) in
+            self.showMessageHUD()
+        }
+        
+        alert.addAction(showHUDAction)
+        alert.addAction(messageHUDAction)
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func showHUD() {
+        self.fetchingView.showHUD()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            self.fetchingView.hideHUD()
+        }
+    }
+    
+    func showMessageHUD() {
+        self.fetchingView.showHUD(title: "Please wait", message: "Your data is processing...", delay: 5.0)
+    }
+    
+    
 }
 
 extension ViewController: UITableViewDelegate {
