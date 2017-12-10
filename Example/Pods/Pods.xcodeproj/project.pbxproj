@@ -16,6 +16,7 @@
 		D244D50E1FD43DDB00388647 /* FetchingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D244D50D1FD43DDB00388647 /* FetchingView.swift */; };
 		D244D5101FD43EAF00388647 /* FetchingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D244D50F1FD43EAF00388647 /* FetchingState.swift */; };
 		D244D5121FD43EE600388647 /* AppErrorProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D244D5111FD43EE600388647 /* AppErrorProvider.swift */; };
+		D27AB3461FDD72AC005457AC /* ViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27AB3451FDD72AC005457AC /* ViewFactory.swift */; };
 		D56A5798A0A74C6207D8F03B66443AFD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
 		E9B6DE35E63FB0FE3D1AC71FF4059D7B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
 		EC4ACF2E9E9909B8D4188B48A4B1C5E7 /* FetchingView-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = DA0304634E6992E813D8FCEFB7A1E82B /* FetchingView-dummy.m */; };
@@ -61,6 +62,7 @@
 		D244D50D1FD43DDB00388647 /* FetchingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchingView.swift; sourceTree = "<group>"; };
 		D244D50F1FD43EAF00388647 /* FetchingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchingState.swift; sourceTree = "<group>"; };
 		D244D5111FD43EE600388647 /* AppErrorProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppErrorProvider.swift; sourceTree = "<group>"; };
+		D27AB3451FDD72AC005457AC /* ViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewFactory.swift; sourceTree = "<group>"; };
 		DA0304634E6992E813D8FCEFB7A1E82B /* FetchingView-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "FetchingView-dummy.m"; sourceTree = "<group>"; };
 		DDDA51BA4D509224CECBC680C65E51DA /* Pods-FetchingView_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-FetchingView_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		E6CC0E35CD32685D8012872A44B1EB22 /* Pods-FetchingView_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-FetchingView_Tests-frameworks.sh"; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 			children = (
 				D244D50A1FD43DA600388647 /* .gitkeep */,
 				D244D50D1FD43DDB00388647 /* FetchingView.swift */,
+				D27AB3451FDD72AC005457AC /* ViewFactory.swift */,
 				D244D50F1FD43EAF00388647 /* FetchingState.swift */,
 				D244D5111FD43EE600388647 /* AppErrorProvider.swift */,
 			);
@@ -345,6 +348,7 @@
 			files = (
 				D244D5121FD43EE600388647 /* AppErrorProvider.swift in Sources */,
 				D244D50E1FD43DDB00388647 /* FetchingView.swift in Sources */,
+				D27AB3461FDD72AC005457AC /* ViewFactory.swift in Sources */,
 				D244D5101FD43EAF00388647 /* FetchingState.swift in Sources */,
 				EC4ACF2E9E9909B8D4188B48A4B1C5E7 /* FetchingView-dummy.m in Sources */,
 			);

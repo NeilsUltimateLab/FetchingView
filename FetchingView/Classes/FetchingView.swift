@@ -12,8 +12,6 @@ public class FetchingView<A> {
     var listView: UIView
     var parentView: UIView
     
-    public var onButtonTapAction: (()->Void)?
-    
     public var fetchingState: FetchingState<A> = .fetching {
         didSet {
             validate(state: fetchingState)
@@ -38,8 +36,8 @@ public class FetchingView<A> {
             self.labelStackView.removeFromSuperview()
             parentStackView.addArrangedSubview(loadingStackView)
             indicatorView.startAnimating()
+            
         case .fetchedError(let error):
-            //self.error = error
             loadingStackView.removeFromSuperview()
             buttonStackView.removeFromSuperview()
             imageView.removeFromSuperview()
@@ -50,11 +48,7 @@ public class FetchingView<A> {
             parentStackView.addArrangedSubview(labelStackView)
             titleLabel.text = error.title
             descriptionLabel.text = error.subtitle
-            if let retryButtonTitle = error.retryButtonTitles {
-                prepareButtonStack(with: retryButtonTitle)
-                parentStackView.addArrangedSubview(buttonStackView)
-            }
-            break
+            
         case .fetchedData(_):
             self.listView.isHidden = false
             self.containerView.isHidden = true
@@ -62,10 +56,8 @@ public class FetchingView<A> {
     }
     
     lazy var containerView: UIView = {
-        let view = UIView(frame: .zero)
-        view.backgroundColor = .clear
+        let view = ViewFactory.view(forBackgroundColor: .clear, clipsToBounds: true)
         view.addSubview(parentStackView)
-        view.translatesAutoresizingMaskIntoConstraints = false
         parentStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         parentStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         parentStackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true
@@ -74,104 +66,82 @@ public class FetchingView<A> {
     }()
     
     var parentStackView: UIStackView = {
-        let stackView = UIStackView(frame: .zero)
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
-        stackView.alignment = .fill
-        stackView.distribution = .fill
-        stackView.spacing = 22
+        let stackView = ViewFactory.stackView(forAxis: .vertical,
+                                              alignment: .fill,
+                                              distribution: .fill,
+                                              spacing: 22)
         return stackView
     }()
     
     lazy var loadingStackView: UIStackView = {
-        let stackView = UIStackView(frame: .zero)
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
-        stackView.alignment = .center
-        stackView.distribution = .fill
-        stackView.spacing = 16
+        let stackView = ViewFactory.stackView(forAxis: .vertical,
+                                              alignment: .center,
+                                              distribution: .fill,
+                                              spacing: 16)
         stackView.addArrangedSubview(self.indicatorView)
         stackView.addArrangedSubview(self.loadingLabel)
         return stackView
     }()
     
     lazy var labelStackView: UIStackView = {
-        let stackView = UIStackView(frame: .zero)
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
-        stackView.alignment = .center
-        stackView.distribution = .fill
-        stackView.spacing = 4
+        let stackView = ViewFactory.stackView(forAxis: .vertical,
+                                              alignment: .center,
+                                              distribution: .fill,
+                                              spacing: 4)
         stackView.addArrangedSubview(self.titleLabel)
         stackView.addArrangedSubview(self.descriptionLabel)
         return stackView
     }()
     
     lazy var buttonStackView: UIStackView = {
-        let stackView = UIStackView(frame: .zero)
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .horizontal
-        stackView.alignment = .fill
-        stackView.spacing = 4
+        let stackView = ViewFactory.stackView(forAxis: .vertical,
+                                              alignment: .center,
+                                              distribution: .fill,
+                                              spacing: 4)
         return stackView
     }()
     
     
     public var indicatorView: UIActivityIndicatorView = {
-        let view = UIActivityIndicatorView(activityIndicatorStyle: .gray)
-        view.hidesWhenStopped = true
+        let view = ViewFactory.activityIndicatorView(style: .gray,
+                                                     hidesWhenStopped: true)
         return view
     }()
     
     public var loadingLabel: UILabel = {
-        let label = UILabel(frame: .zero)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = UIColor.gray
+        let label = ViewFactory.label(title: "Loading".uppercased(),
+                                      textAlignment: .center,
+                                      textColor: .gray,
+                                      numberOfLines: 1)
         label.font = UIFont.systemFont(ofSize: 15)
-        label.text = "Loading".uppercased()
-        label.textAlignment = .center
         return label
     }()
     
     public var titleLabel: UILabel = {
-        let label = UILabel(frame: .zero)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = UIColor.gray
+        let label = ViewFactory.label(title: "",
+                                      textAlignment: .center,
+                                      textColor: .gray,
+                                      numberOfLines: 0,
+                                      lineBreakMode: .byWordWrapping)
         label.font = UIFont.systemFont(ofSize: 21, weight: UIFont.Weight.medium)
-        label.textAlignment = .center
-        label.numberOfLines = 0
-        label.lineBreakMode = .byWordWrapping
         return label
     }()
     
     public var descriptionLabel: UILabel = {
-        let label = UILabel(frame: .zero)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = UIColor.gray
+        let label = ViewFactory.label(title: "",
+                                      textAlignment: .center,
+                                      textColor: .gray,
+                                      numberOfLines: 0,
+                                      lineBreakMode: .byWordWrapping)
         label.font = UIFont.systemFont(ofSize: 17, weight: UIFont.Weight.regular)
-        label.textAlignment = .center
-        label.numberOfLines = 0
-        label.lineBreakMode = .byWordWrapping
         return label
     }()
     
     public var imageView: UIImageView = {
-        let imageView = UIImageView(frame: .zero)
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFit
+        let imageView = ViewFactory.imageView(image: nil,
+                                              contentMode: .scaleAspectFit)
         imageView.tintColor = UIColor.gray
         return imageView
-    }()
-    
-    var retryButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 12
-        button.layer.borderColor = button.tintColor.cgColor
-        button.backgroundColor = button.tintColor
-        button.setTitleColor(.white, for: .normal)
-        button.layer.borderWidth = 1.0
-        return button
     }()
     
     func prepareViews() {
@@ -181,19 +151,13 @@ public class FetchingView<A> {
         containerView.centerYAnchor.constraint(equalTo: parentView.centerYAnchor, constant: 0).isActive = true
     }
     
-    private func prepareButtonStack(with buttons: [String]) {
-        let buttons: [UIButton] = buttons.flatMap({ title in
-            let button = UIButton(type: .system)
-            button.setTitle(title, for: .normal)
-            button.addTarget(self, action: #selector(buttonAction(_:)), for: UIControlEvents.touchUpInside)
-            return button
-        })
-        
+    public func add(_ buttons: [UIButton]) {
         buttonStackView.arrangedSubviews.forEach({$0.removeFromSuperview()})
-        buttons.forEach{buttonStackView.addArrangedSubview($0)}
+        for button in buttons {
+            buttonStackView.addArrangedSubview(button)
+        }
+        buttonStackView.removeFromSuperview()
+        parentStackView.addArrangedSubview(buttonStackView)
     }
     
-    @objc func buttonAction(_ sender: UIButton) {
-        onButtonTapAction?()
-    }
 }

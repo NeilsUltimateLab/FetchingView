@@ -11,5 +11,4 @@ public protocol AppErrorProvider: Error {
     var title: String { get }
     var subtitle: String? { get }
     var image: UIImage? { get }
-    var retryButtonTitles: [String]? { get }
 }

@@ -95,11 +95,11 @@ extension AppError: AppErrorProvider {
         case .notFound:
             return nil
         case .notReachable:
-            return ["Retry"]
+            return nil //["Retry"]
         case .requestTimedOut:
-            return ["Retry"]
+            return nil // ["Retry"]
         case .sessionExpired:
-            return ["Login"]
+            return nil //["Login"]
         case .serverError(_):
             return nil
         case .canNotParse:

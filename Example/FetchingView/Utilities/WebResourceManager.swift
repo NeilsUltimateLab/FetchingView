@@ -41,7 +41,9 @@ class WebResourceManager: NSObject {
         DispatchQueue.global().async {
             let session = URLSession.shared.dataTask(with: resource.url) { (data, response, error) in
                 DispatchQueue.main.async {
-                    completion(resource.decode(data!))
+                    if let data = data {
+                        completion(resource.decode(data))
+                    }
                 }
             }
             session.resume()

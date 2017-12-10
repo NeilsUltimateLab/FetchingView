@@ -46,14 +46,52 @@ class ViewController: UIViewController {
         self.tableView.dataSource = self
     }
     
-    func setupFetchingView() {
-        self.fetchingView = FetchingView(listView: self.tableView, parentView: self.view)
-        self.fetchingView.onButtonTapAction = { [weak self] in
-            self?.fetchResources()
+    var refreshButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.addTarget(self, action: #selector(fetchResources), for: .touchUpInside)
+        button.setTitle("Reload the Resource", for: .normal)
+        return button
+    }()
+    
+    var settingsButton: UIButton = {
+        let button = UIButton(type: UIButtonType.roundedRect)
+        button.setTitle("Open settings", for: .normal)
+        button.addTarget(self, action: #selector(openSettings(_:)), for: .touchUpInside)
+        return button
+    }()
+    
+    var loginButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Login", for: .normal)
+        button.addTarget(self, action: #selector(loginAction(_:)), for: .touchUpInside)
+        button.backgroundColor = button.tintColor
+        button.setTitleColor(.white, for: .normal)
+        return button
+    }()
+    
+    @objc func loginAction(_ sender: UIButton) {
+        let alert = UIAlertController(title: "Login", message: "Please login!", preferredStyle: .alert)
+        let loginAction = UIAlertAction(title: "Login", style: .cancel, handler: {_ in
+            self.fetchResources()
+        })
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+        alert.addAction(loginAction)
+        alert.addAction(cancelAction)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    @objc func openSettings(_ sender: UIButton) {
+        guard let url = URL(string: UIApplicationOpenSettingsURLString) else { return }
+        if UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.openURL(url)
         }
     }
     
-    func fetchResources() {
+    func setupFetchingView() {
+        self.fetchingView = FetchingView(listView: self.tableView, parentView: self.view)
+    }
+    
+    @objc func fetchResources() {
         self.fetchingState = .fetching
         
         Post.resource { (result) in
@@ -74,14 +112,17 @@ class ViewController: UIViewController {
     @IBAction func errorActions(_ sender: Any) {
         let sessionExpiredError = UIAlertAction(title: "Session Expired", style: .destructive) { (_) in
             self.fetchingState = .fetchedError(AppError.sessionExpired)
+            self.fetchingView.add([self.loginButton])
         }
         
         let notFoundError = UIAlertAction(title: "Not Found", style: .default) { (_) in
             self.fetchingState = .fetchedError(AppError.notFound)
+            self.fetchingView.add([self.refreshButton])
         }
         
         let notReachableError = UIAlertAction(title: "Not reachable", style: .default) { (_) in
             self.fetchingState = .fetchedError(AppError.notReachable)
+            self.fetchingView.add([self.settingsButton])
         }
         
         let requestTimedOutError = UIAlertAction(title: "Request Timed Out", style: .default) { (_) in
