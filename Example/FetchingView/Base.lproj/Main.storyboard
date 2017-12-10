@@ -63,11 +63,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="bDb-7O-rfS">
                         <rightBarButtonItems>
-                            <barButtonItem systemItem="cancel" id="Ttb-1y-knw">
-                                <connections>
-                                    <action selector="cancelAction:" destination="vXZ-lx-hvc" id="Y3S-sE-gkV"/>
-                                </connections>
-                            </barButtonItem>
                             <barButtonItem systemItem="action" id="qLh-4j-Iqr">
                                 <connections>
                                     <action selector="errorActions:" destination="vXZ-lx-hvc" id="OXE-qR-bXg"/>
@@ -102,7 +97,7 @@
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Tzc-Fo-Bw4">
                                 <rect key="frame" x="0.0" y="88" width="375" height="641"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="od2-Ax-G8F">
                                     <size key="itemSize" width="147" height="150"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -127,7 +122,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" red="0.30840110780000002" green="0.5618229508" blue="0.0" alpha="0.47953232020547948" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="backgroundColor" red="0.30840110780000002" green="0.5618229508" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="bottom" secondItem="wxB-wS-rn6" secondAttribute="bottom" constant="8" id="M6V-Rh-j8G"/>
                                                         <constraint firstAttribute="width" secondItem="GBG-QP-iNq" secondAttribute="height" id="SuO-t9-qGX"/>
@@ -139,7 +134,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LVO-Qn-heM">
                                                     <rect key="frame" x="8" y="81" width="130" height="49"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -160,7 +155,7 @@
                                 </cells>
                             </collectionView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Tzc-Fo-Bw4" firstAttribute="top" secondItem="Uj8-hK-fPH" secondAttribute="bottom" id="5bM-bk-jwF"/>
                             <constraint firstAttribute="trailing" secondItem="Tzc-Fo-Bw4" secondAttribute="trailing" id="92C-GG-C5Q"/>
@@ -168,7 +163,22 @@
                             <constraint firstItem="Tzc-Fo-Bw4" firstAttribute="leading" secondItem="K2L-Pz-FDc" secondAttribute="leading" id="lbx-uZ-ktU"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="kxh-kc-nIE"/>
+                    <navigationItem key="navigationItem" id="kxh-kc-nIE">
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="refresh" id="m64-hs-1TP">
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="refreshAction:" destination="4nz-xf-KOi" id="b8r-ct-E0A"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="action" id="LfR-Vu-3JY">
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="errorActions:" destination="4nz-xf-KOi" id="USB-yh-g7o"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="Tzc-Fo-Bw4" id="Kb2-kM-aKy"/>
                     </connections>
@@ -184,6 +194,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="9BP-b9-zCC"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="YNz-0T-fT1">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>

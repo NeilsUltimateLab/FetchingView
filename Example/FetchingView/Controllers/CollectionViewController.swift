@@ -36,18 +36,34 @@ class CollectionViewController: UIViewController {
     
     fileprivate func setupFetchingView() {
         self.fetchingView = FetchingView(listView: self.collectionView, parentView: self.view)
+        self.fetchingView.indicatorView.color = UIColor.white
+        self.fetchingView.imageView.tintColor = UIColor.white
+        self.fetchingView.titleLabel.textColor = .white
+        self.fetchingView.descriptionLabel.textColor = .white
     }
     
     fileprivate func setupCollectionView() {
-        self.collectionView.backgroundColor = UIColor.groupTableViewBackground
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
+        self.collectionView.alwaysBounceVertical = true
+    }
+    
+    fileprivate func setupDarkTheme() {
+        self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        self.title = "JSONPlaceholder Users"
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+        if #available(iOS 11.0, *) {
+            self.navigationController?.navigationBar.prefersLargeTitles = true
+            self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+            self.navigationItem.largeTitleDisplayMode = .always
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupFetchingView()
         setupCollectionView()
+        setupDarkTheme()
         
         fetchResource()
     }
@@ -63,6 +79,39 @@ class CollectionViewController: UIViewController {
             }
         }
     }
+    
+    @IBAction func refreshAction(_ sender: UIBarButtonItem) {
+        self.fetchResource()
+    }
+    
+    @IBAction func errorActions(_ sender: UIBarButtonItem) {
+        let sessionExpiredError = UIAlertAction(title: "Session Expired", style: .destructive) { (_) in
+            self.fetchingState = .fetchedError(AppError.sessionExpired)
+            //self.fetchingView.add([self.loginButton])
+        }
+        
+        let notFoundError = UIAlertAction(title: "Not Found", style: .default) { (_) in
+            self.fetchingState = .fetchedError(AppError.notFound)
+            //self.fetchingView.add([self.refreshButton])
+        }
+        
+        let notReachableError = UIAlertAction(title: "Not reachable", style: .default) { (_) in
+            self.fetchingState = .fetchedError(AppError.notReachable)
+            //self.fetchingView.add([self.settingsButton])
+        }
+        
+        let requestTimedOutError = UIAlertAction(title: "Request Timed Out", style: .default) { (_) in
+            self.fetchingState = .fetchedError(AppError.requestTimedOut)
+        }
+        
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(sessionExpiredError)
+        alert.addAction(notFoundError)
+        alert.addAction(notReachableError)
+        alert.addAction(requestTimedOutError)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
 
 }
 

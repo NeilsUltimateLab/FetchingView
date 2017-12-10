@@ -37,8 +37,17 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         setupTableView()
         setupFetchingView()
+        setupTitle()
         
         fetchResources()
+    }
+    
+    func setupTitle() {
+        self.title = "JSONPlaceholder Post"
+        if #available(iOS 11.0, *) {
+            self.navigationController?.navigationBar.prefersLargeTitles = true
+            self.navigationItem.largeTitleDisplayMode = .always
+        }
     }
     
     func setupTableView() {
@@ -49,7 +58,7 @@ class ViewController: UIViewController {
     var refreshButton: UIButton = {
         let button = UIButton(type: .system)
         button.addTarget(self, action: #selector(fetchResources), for: .touchUpInside)
-        button.setTitle("Reload the Resource", for: .normal)
+        button.setTitle("Reload", for: .normal)
         return button
     }()
     
@@ -66,6 +75,8 @@ class ViewController: UIViewController {
         button.addTarget(self, action: #selector(loginAction(_:)), for: .touchUpInside)
         button.backgroundColor = button.tintColor
         button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 8
+        button.layer.masksToBounds = true
         return button
     }()
     
@@ -136,11 +147,6 @@ class ViewController: UIViewController {
         alert.addAction(requestTimedOutError)
         self.present(alert, animated: true, completion: nil)
     }
-    
-    @IBAction func cancelAction(_ sender: Any) {
-        self.fetchingState = .fetchedData([])
-    }
-    
     
 }
 

@@ -21,7 +21,6 @@ class CollectionViewCell: UICollectionViewCell {
         self.contentView.layer.cornerRadius = 10
         self.contentView.layer.borderWidth = 0.5
         self.contentView.layer.borderColor = UIColor.lightGray.cgColor
-        self.contentView.backgroundColor = .white
     }
     
     func configure(with user: User) {
