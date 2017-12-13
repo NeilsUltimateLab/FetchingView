@@ -173,7 +173,7 @@ class ViewController: UIViewController {
     }
     
     func showMessageHUD() {
-        self.fetchingView.showHUD(title: "Please wait", message: "Your data is processing...", delay: 5.0)
+        self.fetchingView.showHUD(title: "Awesome!", message: "Your request is submitted successfully.", delay: 2.0)
     }
     
     

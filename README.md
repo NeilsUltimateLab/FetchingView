@@ -60,7 +60,7 @@ class ViewController: UIViewController {
         User.fetchResource { result in
             if let error = result.error {
                 self.fetchingView.fetchingState = .fetchedError(error)
-                }
+            }
             if let users = result.value {
                 self.fetchingView.fetchingState = .fetchedData(users)
                 //update dataSource and reloadData
@@ -83,7 +83,7 @@ func showHUD() {
 }
 
 func showMessageHUD() {
-    self.fetchingView.showHUD(title: "Please wait", message: "Your data is processing...", delay: 5.0)
+    self.fetchingView.showHUD(title: nil, message: "Your request is submitted successfully.", delay: 2.0)
 }
 
 ```

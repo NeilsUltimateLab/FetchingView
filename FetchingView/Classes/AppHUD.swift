@@ -17,7 +17,35 @@ public class AppHUD {
         case message(String?, String?, TimeInterval)
     }
     
+    public enum Style {
+        case light
+        case extraLight
+        case dark
+        
+        var blurEffectStyle: UIBlurEffectStyle {
+            switch self {
+            case .light:
+                return .light
+            case .extraLight:
+                return .extraLight
+            case .dark:
+                return .dark
+            }
+        }
+        
+        var textColor: UIColor {
+            switch self {
+            case .light, .extraLight:
+                return .darkGray
+            case .dark:
+                return .white
+            }
+        }
+    }
+    
     var isAlreayRenderedOnWindow: Bool = false
+    public var animationDuration: TimeInterval = 0.2
+    public var style: Style = .extraLight
     
     var backgroundView: UIView = {
         return ViewFactory.view(forBackgroundColor: UIColor.black.withAlphaComponent(0.3), clipsToBounds: true)
@@ -30,31 +58,33 @@ public class AppHUD {
         return view
     }()
     
-    var visualEffectView: UIVisualEffectView = {
-        return ViewFactory.visualEffectView(blurEffectStyle: .extraLight)
+    lazy var visualEffectView: UIVisualEffectView = {
+        return ViewFactory.visualEffectView(blurEffectStyle: self.style.blurEffectStyle)
     }()
     
-    public var activityIndicator: UIActivityIndicatorView = {
+    public lazy var activityIndicator: UIActivityIndicatorView = {
         return ViewFactory.activityIndicatorView(style: .whiteLarge,
                                                  hidesWhenStopped: true,
-                                                 color: UIColor.gray)
+                                                 color: self.style.textColor)
     }()
     
-    public var titleLabel: UILabel = {
+    public lazy var titleLabel: UILabel = {
         let label = ViewFactory.label(title: "",
                                  textAlignment: .center,
                                  numberOfLines: 1,
                                  lineBreakMode: .byTruncatingTail)
-        label.font = UIFont.systemFont(ofSize: 17, weight: UIFont.Weight.medium)
+        label.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.title1)
+        label.textColor = self.style.textColor
         return label
     }()
     
-    public var messageLabel: UILabel = {
+    public lazy var messageLabel: UILabel = {
         let label = ViewFactory.label(title: "",
                                       textAlignment: .center,
                                       numberOfLines: 0,
                                       lineBreakMode: .byWordWrapping)
-        label.font = UIFont.systemFont(ofSize: 15, weight: UIFont.Weight.regular)
+        label.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.subheadline)
+        label.textColor = self.style.textColor
         return label
     }()
     
@@ -182,7 +212,7 @@ public class AppHUD {
     }
     
     private func animateHUD() {
-        UIView.animate(withDuration: 0.5, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
+        UIView.animate(withDuration: animationDuration, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
             self.backgroundView.alpha = 1
             self.containerView.transform = .identity
             self.containerView.alpha = 1
@@ -194,7 +224,7 @@ public class AppHUD {
     }
     
     public func hideHUD(completion: (()->Void)? = nil) {
-        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn, animations: {
+        UIView.animate(withDuration: animationDuration, delay: 0, options: .curveEaseIn, animations: {
             self.backgroundView.alpha = 0
             self.containerView.alpha = 0
         }) { (succeed) in
